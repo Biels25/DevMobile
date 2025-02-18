@@ -10,34 +10,41 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import logoX from './assets/NativeLogo.png';
+import logoX from './assets/NativeLogo.png'; // Importa a imagem do logo
 
 const App = () => {
+  // Estado para armazenar o texto digitado no input
   const [text, setText] = useState('');
+  
+  // Estado para armazenar a lista de itens
   const [items, setItems] = useState([
     { id: '1', name: 'Item 1' },
     { id: '2', name: 'Item 2' },
     { id: '3', name: 'Item 3' },
   ]);
 
+  // Função chamada ao pressionar o botão TouchableOpacity
   const handlePress = () => {
     alert('Botão pressionado!');
   };
 
+  // Função para adicionar um novo item à lista
   const addItem = () => {
     if (text.trim() !== '') {
       setItems([...items, { id: Date.now().toString(), name: text }]);
-      setText('');
+      setText(''); // Limpa o input após adicionar
     }
   };
 
   return (
     <ScrollView style={styles.container}>
+      {/* Cabeçalho do app */}
       <View style={styles.header}>
         <Image source={logoX} style={styles.image} />
         <Text style={styles.title}>Exemplo de App React Native</Text>
       </View>
 
+      {/* Campo de entrada de texto */}
       <TextInput
         style={styles.input}
         placeholder="Digite algo"
@@ -46,6 +53,7 @@ const App = () => {
       />
       <Button title="Adicionar Item" onPress={addItem} />
 
+      {/* Lista de itens adicionados */}
       <FlatList
         data={items}
         renderItem={({ item }) => (
@@ -56,6 +64,7 @@ const App = () => {
         keyExtractor={(item) => item.id}
       />
 
+      {/* Botão de ação com TouchableOpacity */}
       <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.buttonText}>Pressione-me</Text>
       </TouchableOpacity>
@@ -63,6 +72,7 @@ const App = () => {
   );
 };
 
+// Estilos do aplicativo
 const styles = StyleSheet.create({
   container: {
     flex: 1,

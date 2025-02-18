@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  SectionList,
-  StyleSheet,
+  View, // Contêiner genérico para agrupar elementos
+  Text, // Componente para exibição de texto
+  Image, // Componente para exibição de imagens
+  TextInput, // Campo de entrada de texto
+  Button, // Botão básico
+  TouchableOpacity, // Botão customizável
+  ScrollView, // Contêiner que permite rolagem
+  FlatList, // Lista otimizada para grandes conjuntos de dados
+  SectionList, // Lista que agrupa dados em seções
+  StyleSheet, // API para criação de estilos
 } from 'react-native';
-import logoX from './assets/NativeLogo.png';
+import logoX from './assets/NativeLogo.png'; // Importa a imagem do logo
 
 const App = () => {
+  // Estado para armazenar o texto digitado no input
   const [text, setText] = useState('');
+
+  // Estado para armazenar a lista de itens
   const [items, setItems] = useState([
     { id: '1', name: 'Item 1' },
     { id: '2', name: 'Item 2' },
     { id: '3', name: 'Item 3' },
   ]);
 
+  // Dados das seções para a SectionList
   const sections = [
     {
       title: 'Seção 1',
@@ -38,24 +42,28 @@ const App = () => {
     },
   ];
 
+  // Função chamada ao pressionar o botão padrão
   const handlePress = () => {
     alert('Botão pressionado!');
   };
 
+  // Função para adicionar um novo item à lista
   const addItem = () => {
     if (text.trim() !== '') {
       setItems([...items, { id: Date.now().toString(), name: text }]);
-      setText('');
+      setText(''); // Limpa o input após adicionar
     }
   };
 
   return (
     <ScrollView style={styles.container}>
+      {/* Cabeçalho do app */}
       <View style={styles.view}>
         <Image source={logoX} style={styles.image} />
-        <Text style={styles.image}></Text>
+        <Text style={styles.text}>Exemplo de App React Native</Text>
       </View>
 
+      {/* Campo de entrada de texto */}
       <TextInput
         style={styles.TextInput}
         placeholder="Digite algo"
@@ -64,6 +72,7 @@ const App = () => {
       />
       <Button title="Clique Aqui" onPress={handlePress} />
 
+      {/* Lista de itens adicionados */}
       <FlatList
         data={items}
         renderItem={({ item }) => (
@@ -74,15 +83,17 @@ const App = () => {
         keyExtractor={(item) => item.id}
       />
 
+      {/* Botão de ação com TouchableOpacity */}
       <TouchableOpacity style={styles.TouchableOpacity} onPress={addItem}>
         <Text style={styles.TouchableOpacityText}>Toque aqui</Text>
       </TouchableOpacity>
 
+      {/* Lista seccionada de itens */}
       <SectionList
         sections={sections}
-        renderItem={({ item }) => <text>(item.name)</text>}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
         renderSectionHeader={({ section: { title } }) => (
-          <text style={styles.sectionHeader}>{title}</text>
+          <Text style={styles.sectionHeader}>{title}</Text>
         )}
         keyExtractor={(item) => item.id.toString()}
       />
@@ -90,6 +101,7 @@ const App = () => {
   );
 };
 
+// Estilos do aplicativo
 const styles = StyleSheet.create({
   container: {
     flex: 1,
