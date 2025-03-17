@@ -29,7 +29,7 @@ class MeuComponente extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.contador !== nextState.contador){
+        if (this.state.contador !== nextState.contador || this.state.exibirComponente !== nextState.exibirComponente){
             console.log('shouldComponentUpdate: Contador mudou, renderizado');
             return true;
         }
@@ -40,7 +40,15 @@ class MeuComponente extends Component {
     render() {
         if (!this.state.exibirComponente) {
             console.log('render: para não renderizar se exibirComponente.');
-            return null;
+            return (
+                <View style={styles.container}>
+                    <Button
+                    title="Exibir/Ocultar Componente"
+                    onPress={this.exibirOuOcultarComponente}
+                    style={styles.button}
+                    />
+                </View>
+            );
         }
 
         console.log('render: renderiza Componente.');
