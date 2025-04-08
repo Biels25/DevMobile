@@ -9,6 +9,9 @@ import EditPieceScreen from './screens/TelaDeEdicao';
 
 const Stack = createStackNavigator();
 
+
+// João Vitor Pinheiro Garcia
+
 const App = () => {
   return (
     <NavigationContainer>
